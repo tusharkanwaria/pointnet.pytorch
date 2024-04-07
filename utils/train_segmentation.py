@@ -113,6 +113,17 @@ for epoch in range(opt.nepoch):
             print('[%d: %d/%d] %s loss: %f accuracy: %f' % (epoch, i, num_batch, blue('test'), loss.item(), correct.item()/float(opt.batchSize * 2500)))
 
     torch.save(classifier.state_dict(), '%s/seg_model_%s_%d.pth' % (opt.outf, opt.class_choice, epoch))
+    # Specify the path where you want to save the model in Google Drive
+    drive_save_path = '/content/drive/My Drive/Saved_NN/{}'.format(opt.outf)
+    
+    # Check if the directory exists, if not, create it
+    if not os.path.exists(drive_save_path):
+        os.makedirs(drive_save_path)
+    
+    # Save the model to Google Drive
+    drive_model_path = os.path.join(drive_save_path, 'seg_model_{}_{}.pth'.format(opt.class_choice, epoch))
+    torch.save(classifier.state_dict(), drive_model_path)
+
 
 ## benchmark mIOU
 shape_ious = []
