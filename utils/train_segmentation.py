@@ -12,7 +12,7 @@ import torch.nn.functional as F
 from tqdm import tqdm
 import numpy as np
 
-
+print("CustomScriptImplemented")
 parser = argparse.ArgumentParser()
 parser.add_argument(
     '--batchSize', type=int, default=32, help='input batch size')
